@@ -11,17 +11,34 @@ public class UserTest {
 //		addUser();
 //		deleteUser();
 //		updateUser();
+//		allUsers();
+		findByName();
+
+	}
+
+	private static void findByName() {
+		UserDAO dao = new UserDAO();
+		List<User> list = dao.findByName("lu");
 		
+		for (User u : list) {
+			System.out.println("ID    : " + u.getUserid());
+			System.out.println("Name  : " + u.getName());
+			System.out.println("Login : " + u.getLogin());
+			System.out.println("Pass  : " + u.getPass());
+			System.out.println();
+		}
+	}
+
+	private static void allUsers() {
 		UserDAO dao = new UserDAO();
 		List<User> list = dao.allUsers();
 		for (User u : list) {
-			System.out.println("ID    : "+u.getUserid());
-			System.out.println("Name  : "+u.getName());
-			System.out.println("Login : "+u.getLogin());
-			System.out.println("Pass  : "+u.getPass());
+			System.out.println("ID    : " + u.getUserid());
+			System.out.println("Name  : " + u.getName());
+			System.out.println("Login : " + u.getLogin());
+			System.out.println("Pass  : " + u.getPass());
 			System.out.println();
 		}
-		
 	}
 
 	private static void updateUser() {
@@ -30,7 +47,7 @@ public class UserTest {
 		u.setLogin("sofi1");
 		u.setPass("sofi1");
 		u.setUserid(41);
-		
+
 		UserDAO dao = new UserDAO();
 		dao.updateUser(u);
 	}

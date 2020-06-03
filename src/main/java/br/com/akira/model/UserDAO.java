@@ -93,6 +93,7 @@ public class UserDAO {
 
 	/**
 	 * Find all Users
+	 * 
 	 * @return list
 	 */
 	public List<User> allUsers() {
@@ -110,7 +111,7 @@ public class UserDAO {
 				list.add(u);
 			}
 			return list;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -121,8 +122,42 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return null;
+	}
 
+	/**
+	 * Find by name
+	 * 
+	 * @param String
+	 * @return list
+	 */
+	public List<User> findByName(String name) {
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM user WHERE name LIKE ?");
+			ps.setString(1, "%" + name + "%");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				User u = new User();
+				u.setUserid(rs.getInt("userid"));
+				u.setName(rs.getString("name"));
+				u.setLogin(rs.getString("login"));
+				u.setPass(rs.getString("pass"));
+				list.add(u);
+			}
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

@@ -19,3 +19,7 @@ INSERT INTO user VALUES(null,'Carlos','car','666');
 INSERT INTO user VALUES(null,'Fabio','fab','777');
 
 SELECT*FROM user;
+
+SELECT login FROM user WHERE login='a';
+
+SELECT * FROM user WHERE name LIKE '%lu%';
