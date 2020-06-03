@@ -229,4 +229,17 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
+	/**
+	 * save User
+	 * @param user 
+	 */
+	public void saveUser(User u) {
+		if(u.getUserid()==0) {
+			addUser(u);
+		}else {
+			updateUser(u);
+		}
+	}
+	
 }

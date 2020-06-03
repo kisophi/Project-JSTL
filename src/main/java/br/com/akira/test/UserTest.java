@@ -14,7 +14,11 @@ public class UserTest {
 //		allUsers();
 //		findByName();
 //		findByID();
+//		userAutentication();
+		
+	}
 
+	private static void userAutentication() {
 		UserDAO dao = new UserDAO();
 		User u = dao.userAutentication("akira", "11");
 		
