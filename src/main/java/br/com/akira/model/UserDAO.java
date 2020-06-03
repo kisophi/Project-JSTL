@@ -182,7 +182,41 @@ public class UserDAO {
 				u.setPass(rs.getString("pass"));
 			}
 			return u;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * User Autentication
+	 * 
+	 * @param String
+	 * @return User
+	 */
+	public User userAutentication(String login,String pass) {
+		User u = new User();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM user WHERE login=? AND pass=?");
+			ps.setString(1, login);
+			ps.setString(2, pass);
+			ResultSet rs = ps.executeQuery();
 
+			if (rs.next()) {
+				u.setUserid(rs.getInt("userid"));
+				u.setName(rs.getString("name"));
+				u.setLogin(rs.getString("login"));
+				u.setPass(rs.getString("pass"));
+			}
+			return u;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

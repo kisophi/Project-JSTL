@@ -14,15 +14,20 @@ public class UserTest {
 //		allUsers();
 //		findByName();
 //		findByID();
-		
-		
 
+		UserDAO dao = new UserDAO();
+		User u = dao.userAutentication("akira", "11");
+		
+		System.out.println("ID    : " + u.getUserid());
+		System.out.println("Name  : " + u.getName());
+		System.out.println("Login : " + u.getLogin());
+		System.out.println("Pass  : " + u.getPass());
 	}
 
 	private static void findByID() {
 		UserDAO dao = new UserDAO();
 		User u = dao.findById(5);
-		
+
 		System.out.println("ID    : " + u.getUserid());
 		System.out.println("Name  : " + u.getName());
 		System.out.println("Login : " + u.getLogin());
@@ -32,7 +37,7 @@ public class UserTest {
 	private static void findByName() {
 		UserDAO dao = new UserDAO();
 		List<User> list = dao.findByName("lu");
-		
+
 		for (User u : list) {
 			System.out.println("ID    : " + u.getUserid());
 			System.out.println("Name  : " + u.getName());
