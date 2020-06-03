@@ -2,7 +2,10 @@ package br.com.akira.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.akira.util.ConnectionFactory;
 
@@ -23,11 +26,11 @@ public class UserDAO {
 			ps.setString(2, u.getLogin());
 			ps.setString(3, u.getPass());
 			ps.execute();
-			System.out.println("Added User"+toString());
-			
+			System.out.println("Added User : " + toString());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				ps.close();
 				conn.close();
@@ -36,9 +39,10 @@ public class UserDAO {
 			}
 		}
 	}
-	
+
 	/**
 	 * Delete User
+	 * 
 	 * @param Integer
 	 */
 	public void deleteUser(Integer id) {
@@ -46,11 +50,11 @@ public class UserDAO {
 			ps = conn.prepareStatement("DELETE FROM user WHERE userid=?");
 			ps.setInt(1, id);
 			ps.execute();
-			System.out.println("Delete User"+toString());
-			
+			System.out.println("Delete User : " + toString());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				ps.close();
 				conn.close();
@@ -59,9 +63,10 @@ public class UserDAO {
 			}
 		}
 	}
-	
+
 	/**
 	 * update User
+	 * 
 	 * @param User
 	 */
 	public void updateUser(User u) {
@@ -72,11 +77,11 @@ public class UserDAO {
 			ps.setString(3, u.getPass());
 			ps.setInt(4, u.getUserid());
 			ps.execute();
-			System.out.println("Update User"+toString());
-			
+			System.out.println("Update User : " + toString());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				ps.close();
 				conn.close();
@@ -84,5 +89,40 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Find all Users
+	 * @return list
+	 */
+	public List<User> allUsers() {
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM user");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				User u = new User();
+				u.setUserid(rs.getInt("userid"));
+				u.setName(rs.getString("name"));
+				u.setLogin(rs.getString("login"));
+				u.setPass(rs.getString("pass"));
+				list.add(u);
+			}
+			return list;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return null;
+
 	}
 }

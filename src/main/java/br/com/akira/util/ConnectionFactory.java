@@ -8,9 +8,9 @@ public class ConnectionFactory {
 
 	public static Connection getConnecitonMySql() {
 		try {
-			return DriverManager.getConnection("jdbc:mysql://localhost/dbjava","root","123456");
+			return DriverManager.getConnection("jdbc:mysql://localhost/dbjava?useTimezone=true&serverTimezone=UTC","root","123456");
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 
