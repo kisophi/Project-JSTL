@@ -23,6 +23,7 @@ public class UserController extends HttpServlet {
 
 		String action = request.getParameter("action");
 		String userid = request.getParameter("userid");
+		String name = request.getParameter("name");
 
 		/**
 		 * List of Users
@@ -60,8 +61,17 @@ public class UserController extends HttpServlet {
 			
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("/updateUser.jsp").forward(request, response);
-			
-			
+		}
+		
+		/**
+		 * Find User by name
+		 */
+		if (action.equals("findByName")) {
+			UserDAO dao = new UserDAO();
+			List<User> list = dao.findByName(name);
+
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/findByName.jsp").forward(request, response);
 		}
 		
 		
