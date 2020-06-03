@@ -160,4 +160,39 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Find by ID
+	 * 
+	 * @param Integer
+	 * @return User
+	 */
+	public User findById(Integer id) {
+		User u = new User();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM user WHERE userid=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				u.setUserid(rs.getInt("userid"));
+				u.setName(rs.getString("name"));
+				u.setLogin(rs.getString("login"));
+				u.setPass(rs.getString("pass"));
+			}
+			return u;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 }

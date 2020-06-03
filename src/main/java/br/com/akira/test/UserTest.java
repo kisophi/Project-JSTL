@@ -12,8 +12,21 @@ public class UserTest {
 //		deleteUser();
 //		updateUser();
 //		allUsers();
-		findByName();
+//		findByName();
+//		findByID();
+		
+		
 
+	}
+
+	private static void findByID() {
+		UserDAO dao = new UserDAO();
+		User u = dao.findById(5);
+		
+		System.out.println("ID    : " + u.getUserid());
+		System.out.println("Name  : " + u.getName());
+		System.out.println("Login : " + u.getLogin());
+		System.out.println("Pass  : " + u.getPass());
 	}
 
 	private static void findByName() {
