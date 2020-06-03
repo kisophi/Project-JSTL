@@ -16,15 +16,15 @@
 
 
 	<form action="userController" method="get">
-		<table border="3">
+		<table border="1">
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
 				<th>Login</th>
 				<th>Password</th>
 				<td></td>
+				<td></td>
 			</tr>
-
 
 			<c:forEach items="${list}" var="u">
 				<tr>
@@ -33,9 +33,10 @@
 					<td>${u.login}</td>
 					<td>${u.pass}</td>
 					<td><a href="userController?action=deleteUser&userid=${u.userid}">Delete</a></td>
-					
+					<td><a href="userController?action=updateUser&userid=${u.userid}">Update</a></td>
 				</tr>
 			</c:forEach>
+			
 		</table>
 	</form>
 </body>

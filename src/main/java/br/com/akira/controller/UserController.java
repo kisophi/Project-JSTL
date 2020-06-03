@@ -51,6 +51,19 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("userController?action=allUsers");
 		}
 		
+		/**
+		 * Update Users
+		 */
+		else if(action.equals("updateUser")) {
+			UserDAO dao = new UserDAO();
+			User user = dao.findById(Integer.parseInt(userid));
+			
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("/updateUser.jsp").forward(request, response);
+			
+			
+		}
+		
 		
 	}
 
