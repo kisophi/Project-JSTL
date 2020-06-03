@@ -16,7 +16,7 @@
 			</tr>
 			<tr>
 				<th>Name</th>
-				<th><input type="text" name="name" /></th>
+				<th><input type="text" name="name" autofocus="autofocus" /></th>
 			</tr>
 			<tr>
 				<th>Login</th>

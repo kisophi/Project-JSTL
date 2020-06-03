@@ -19,9 +19,10 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String action = request.getParameter("action");
+		String userid = request.getParameter("userid");
 
 		/**
 		 * List of Users
@@ -32,6 +33,22 @@ public class UserController extends HttpServlet {
 
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/allUsers.jsp").forward(request, response);
+		}
+		
+		/**
+		 * Add Users
+		 */
+		else if(action.equals("addUser")) {
+			request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+		}
+		
+		/**
+		 * Delete Users
+		 */
+		else if(action.equals("deleteUser")) {
+			UserDAO dao = new UserDAO();
+			dao.deleteUser(Integer.parseInt(userid));
+			response.sendRedirect("userController?action=allUsers");
 		}
 		
 		
@@ -55,6 +72,8 @@ public class UserController extends HttpServlet {
 
 		UserDAO dao = new UserDAO();
 		dao.saveUser(u);
+		
+		response.sendRedirect("userController?action=allUsers");
 	}
 
 }
