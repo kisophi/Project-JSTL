@@ -43,10 +43,36 @@ public class UserDAO {
 	 */
 	public void deleteUser(Integer id) {
 		try {
-			ps = conn.prepareStatement("DELETE user FROM WHERE userid=?");
+			ps = conn.prepareStatement("DELETE FROM user WHERE userid=?");
 			ps.setInt(1, id);
 			ps.execute();
 			System.out.println("Delete User"+toString());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * update User
+	 * @param User
+	 */
+	public void updateUser(User u) {
+		try {
+			ps = conn.prepareStatement("UPDATE user SET name=?, login=?, pass=? WHERE userid=?");
+			ps.setString(1, u.getName());
+			ps.setString(2, u.getLogin());
+			ps.setString(3, u.getPass());
+			ps.setInt(4, u.getUserid());
+			ps.execute();
+			System.out.println("Update User"+toString());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
