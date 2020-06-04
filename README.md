@@ -1,5 +1,5 @@
 # Project-JSTL 
-## Sistema Java basico
+## Sistema Java Web basico
 ### Maven dependency
 ##### - MySQL 8.0.20
 ##### - Servlet api 4.0.1
