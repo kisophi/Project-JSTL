@@ -24,6 +24,10 @@ public class UserController extends HttpServlet {
 		String action = request.getParameter("action");
 		String userid = request.getParameter("userid");
 		String name = request.getParameter("name");
+		
+		if(action==null) {
+			action = "allUsers";
+		}
 
 		/**
 		 * List of Users
@@ -33,14 +37,14 @@ public class UserController extends HttpServlet {
 			List<User> list = dao.allUsers();
 
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/allUsers.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/allUsers.jsp").forward(request, response);
 		}
 		
 		/**
 		 * Add Users
 		 */
 		else if(action.equals("addUser")) {
-			request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/addUser.jsp").forward(request, response);
 		}
 		
 		/**
@@ -49,7 +53,7 @@ public class UserController extends HttpServlet {
 		else if(action.equals("deleteUser")) {
 			UserDAO dao = new UserDAO();
 			dao.deleteUser(Integer.parseInt(userid));
-			response.sendRedirect("userController?action=allUsers");
+			response.sendRedirect("userController");
 		}
 		
 		/**
@@ -60,7 +64,7 @@ public class UserController extends HttpServlet {
 			User user = dao.findById(Integer.parseInt(userid));
 			
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("/updateUser.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/updateUser.jsp").forward(request, response);
 		}
 		
 		/**
@@ -71,7 +75,7 @@ public class UserController extends HttpServlet {
 			List<User> list = dao.findByName(name);
 
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/findByName.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/findByName.jsp").forward(request, response);
 		}
 		
 		
@@ -96,7 +100,7 @@ public class UserController extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		dao.saveUser(u);
 		
-		response.sendRedirect("userController?action=allUsers");
+		response.sendRedirect("userController");
 	}
 
 }

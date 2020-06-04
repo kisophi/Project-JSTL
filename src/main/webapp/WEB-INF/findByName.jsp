@@ -41,7 +41,7 @@
 					<td>${u.name}</td>
 					<td>${u.login}</td>
 					<td>${u.pass}</td>
-					<td><a href="userController?action=deleteUser&userid=${u.userid}">Delete</a></td>
+					<td><a href="userController?action=deleteUser&userid=${u.userid}" onclick="return confirm('Are you sure you want to delete?');">Delete</a></td>
 					<td><a href="userController?action=updateUser&userid=${u.userid}">Update</a></td>
 				</tr>
 			</c:forEach>
