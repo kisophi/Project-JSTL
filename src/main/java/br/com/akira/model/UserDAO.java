@@ -21,7 +21,7 @@ public class UserDAO {
 	 */
 	public void addUser(User u) {
 		try {
-			ps = conn.prepareStatement("INSERT INTO user VALUES(null,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO user VALUES(null,?,?,md5(?))");
 			ps.setString(1, u.getName());
 			ps.setString(2, u.getLogin());
 			ps.setString(3, u.getPass());
@@ -71,7 +71,7 @@ public class UserDAO {
 	 */
 	public void updateUser(User u) {
 		try {
-			ps = conn.prepareStatement("UPDATE user SET name=?, login=?, pass=? WHERE userid=?");
+			ps = conn.prepareStatement("UPDATE user SET name=?, login=?, pass=md5(?) WHERE userid=?");
 			ps.setString(1, u.getName());
 			ps.setString(2, u.getLogin());
 			ps.setString(3, u.getPass());
@@ -201,12 +201,12 @@ public class UserDAO {
 	 * @param String
 	 * @return User
 	 */
-	public User userAutentication(String login,String pass) {
+	public User userAutentication(User user) {
 		User u = new User();
 		try {
-			ps = conn.prepareStatement("SELECT * FROM user WHERE login=? AND pass=?");
-			ps.setString(1, login);
-			ps.setString(2, pass);
+			ps = conn.prepareStatement("SELECT * FROM user WHERE login=? AND pass=md5(?)");
+			ps.setString(1, user.getLogin());
+			ps.setString(2, user.getPass());
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {

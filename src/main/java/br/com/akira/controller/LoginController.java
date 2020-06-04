@@ -20,31 +20,48 @@ public class LoginController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// Destroy session
+		HttpSession session = request.getSession();
+		if (session != null) {
+			session.invalidate();
+		}
+		response.sendRedirect("login.jsp");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String login = request.getParameter("login");
-		String pass  = request.getParameter("pass");
+		String pass = request.getParameter("pass");
 		
+		User user = new User();
+		user.setLogin(login);
+		user.setPass(pass);
+
 		UserDAO dao = new UserDAO();
-		User u = dao.userAutentication(login, pass);
-		
-		if(u!=null) {
+		User u = dao.userAutentication(user);
+
+		if (u.getLogin() != null) {
+			// Create Session
 			HttpSession session = request.getSession();
+
+			// set user
 			session.setAttribute("userSessionLogin", u);
-			
-			//max time of session
-			session.setMaxInactiveInterval(60*2);
-			
+
+			// max time of session
+			session.setMaxInactiveInterval(60 * 2);
+
 			response.sendRedirect("userController");
-//			request.getRequestDispatcher("")
-		}else {
+		}
+
+		else {
+			//send msg invalid login
+			request.setAttribute("invalidLogin", "Invalid user or password");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-		
-	
+
 	}
 
 }

@@ -14,13 +14,17 @@ public class UserTest {
 //		allUsers();
 //		findByName();
 //		findByID();
-//		userAutentication();
+		userAutentication();
 		
 	}
 
 	private static void userAutentication() {
+		User user = new User();
+		user.setLogin("aki");
+		user.setPass("aki");
+		
 		UserDAO dao = new UserDAO();
-		User u = dao.userAutentication("akira", "11");
+		User u = dao.userAutentication(user);
 		
 		System.out.println("ID    : " + u.getUserid());
 		System.out.println("Name  : " + u.getName());
