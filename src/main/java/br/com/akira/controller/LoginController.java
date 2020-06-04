@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		User u = dao.userAutentication(user);
 
-		if (u.getLogin() != null) {
+		if (u != null) {
 			// Create Session
 			HttpSession session = request.getSession();
 

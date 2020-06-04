@@ -52,6 +52,11 @@
 				<td>Name : </td>
 				<th>${userSessionLogin.name}</th>
 			</tr>
+			
+			<tr>
+				<td><a href="loginController">Logout</a> </td>
+				<th></th>
+			</tr>
 		</table>
 		
 	</form>

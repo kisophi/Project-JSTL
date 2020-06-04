@@ -202,7 +202,6 @@ public class UserDAO {
 	 * @return User
 	 */
 	public User userAutentication(User user) {
-		User u = new User();
 		try {
 			ps = conn.prepareStatement("SELECT * FROM user WHERE login=? AND pass=md5(?)");
 			ps.setString(1, user.getLogin());
@@ -210,12 +209,13 @@ public class UserDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
+				User u = new User();
 				u.setUserid(rs.getInt("userid"));
 				u.setName(rs.getString("name"));
 				u.setLogin(rs.getString("login"));
 				u.setPass(rs.getString("pass"));
+				return u;
 			}
-			return u;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
