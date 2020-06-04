@@ -51,6 +51,10 @@
 ![tela novo Usuario](https://user-images.githubusercontent.com/14569809/83802132-9d1a6980-a680-11ea-80fa-a31e4052bcd6.PNG)
 
 
+### Tela de atualiza Usuario
+![tela de update](https://user-images.githubusercontent.com/14569809/83802221-bcb19200-a680-11ea-8f42-8d04f7300410.PNG)
+
+
 ### Tela de Login
 ![tela de Login](https://user-images.githubusercontent.com/14569809/83800640-1f555e80-a67e-11ea-9633-e10e6ba76767.PNG)
 - Verifica o Usuario e a senha no banco de dados
