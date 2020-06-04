@@ -48,6 +48,14 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<table>
+			<tr>
+				<td>Name : </td>
+				<th>${userSessionLogin.name}</th>
+			</tr>
+		</table>
+
 	</form>
 </body>
 </html>
